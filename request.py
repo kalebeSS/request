@@ -1,9 +1,14 @@
 import requests
-import json
 
-cotaçao = requests.get("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL")
-cotaçao = cotaçao.json()
+Url = 'https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL'
 
-dolar = cotaçao['USDBRL']['bid']
-euro = cotaçao['EURBRL']['bid']
-btc = cotaçao['BTCBRL']['bid']
+try:
+    response = requests.get(Url)
+    data = response.text
+    if response.status_code ==200:
+        print(data)
+    else:
+        print('não foi possivel consumir a api do site')
+
+except Exception as ex:
+    print(f'ocorreu um erro {ex}')
